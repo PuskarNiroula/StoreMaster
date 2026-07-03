@@ -12,11 +12,11 @@ class UseSeeder extends Seeder
 public function run(): void
 {
     $users = [
-        
+
         ['name' => 'Alice', 'email' => 'alice@example.com', 'role' => 'user',      'status' => 'active'],
-        ['name' => 'Bob',   'email' => 'bob@example.com',   'role' => 'user',      'status' => 'inactive'],
+        ['name' => 'Bob',   'email' => 'bob@example.com',   'role' => 'user',      'status' => 'deactivate'],
         ['name' => 'Emma',  'email' => 'emma@example.com',  'role' => 'user',      'status' => 'active'],
-        ['name' => 'David', 'email' => 'david@example.com', 'role' => 'admin',     'status' => 'inactive'],
+        ['name' => 'David', 'email' => 'david@example.com', 'role' => 'admin',     'status' => 'deactivate'],
     ];
 
     foreach ($users as $data) {
@@ -24,7 +24,7 @@ public function run(): void
             ['email' => $data['email']],
             [
                 'name' => $data['name'],
-                'password' => Hash::make('Password'),
+                'password' => "password",
                 'role' => $data['role'],
                 'status' => $data['status'],
             ]
@@ -34,4 +34,3 @@ public function run(): void
 
 }
 
-    

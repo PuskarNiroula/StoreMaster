@@ -8,27 +8,33 @@
 @section('content')
 <div class="container">
 
-        <!-- Total Sales & Number of Bills -->
       <div class="topRow">
 
 
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Total Sales</h5>
-                    <select id="sales-time-period" class="form-select mb-3">
-                        <option value="this_year" selected >This Year </option>
-                        <option value="this_week">This Week</option>
-                        <option value="this_month">This Month</option>
-                        
-                    </select>
-                    <canvas id="monthlySalesHistogram" height="200"></canvas>
+          <div class="card shadow-sm border-0 mb-4">
+              <div class="card-body">
 
-                </div>
-            </div>
-        </div>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                      <h5 class="card-title mb-0">
+                          Total Sales
+                      </h5>
 
-      
+                      <select id="sales-time-period"
+                              class="form-select form-select-sm"
+                              style="width:160px;">
+                          <option value="this_week">This Week</option>
+                          <option value="this_month" selected>This Month</option>
+                      </select>
+                  </div>
+
+                  <div style="height:320px;">
+                      <canvas id="monthlySalesHistogram"></canvas>
+                  </div>
+
+              </div>
+          </div>
+
+
 
       </div>
         <div class="row">
@@ -37,14 +43,14 @@
             <div class="card-hello">
                 <div class="card-body">
                     <canvas id="revenuePieChart" ></canvas>
-                   
+
                 </div>
             </div>
-       
-    </div>
-      
 
-  
+    </div>
+
+
+
         <!-- Top 3 Items Sold by Units (Line Graph) -->
         <div class="col-lg-6 col-md-12 col-sm-12">
             <div class="card mb-4">
@@ -58,8 +64,8 @@
                     <div class="card-body">
                         <canvas id="topSoldItemsBarChart"></canvas>
                     </div>
-              
-                
+
+
             </div>
         </div>
     </div>
@@ -78,7 +84,7 @@
 
 
 <script  src="{{ asset('/js/sales.js') }}">
-  
+
 </script>
 
 @endsection

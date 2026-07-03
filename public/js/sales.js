@@ -176,40 +176,123 @@ function loadMonthlySales(topType) {
 
             const ctx = document.getElementById('monthlySalesHistogram').getContext('2d');
 
+// Create gradient
+            const gradient = ctx.createLinearGradient(0, 0, 0, 250);
+            gradient.addColorStop(0, "rgba(54, 185, 204, 0.45)");
+            gradient.addColorStop(1, "rgba(54, 185, 204, 0)");
+
             if (salesHistogramChart) {
+
                 salesHistogramChart.data.labels = labels;
                 salesHistogramChart.data.datasets[0].data = totalSales;
                 salesHistogramChart.update();
+
             } else {
+
                 salesHistogramChart = new Chart(ctx, {
                     type: 'line',
+
                     data: {
                         labels: labels,
+
                         datasets: [{
-                            label: 'Total Sales',
+                            label: 'Sales',
+
                             data: totalSales,
+
                             borderColor: '#36b9cc',
-                            backgroundColor: 'rgba(54, 185, 204, 0.2)',
-                            tension: 0.3,
+                            backgroundColor: gradient,
+
+                            borderWidth: 3,
+
                             fill: true,
-                            pointRadius: 4,
-                            pointBackgroundColor: '#36b9cc'
+
+                            tension: 0.45,
+
+                            pointRadius: 5,
+                            pointHoverRadius: 8,
+
+                            pointBackgroundColor: '#36b9cc',
+                            pointBorderColor: '#fff',
+                            pointBorderWidth: 2,
+
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#36b9cc'
                         }]
                     },
+
                     options: {
+
                         responsive: true,
+                        maintainAspectRatio: false,
+
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+
+                        animation: {
+                            duration: 1200,
+                            easing: 'easeOutQuart'
+                        },
+
                         scales: {
+
+                            x: {
+
+                                grid: {
+                                    display: false
+                                },
+
+                                ticks: {
+                                    color: '#666'
+                                }
+                            },
+
                             y: {
+
                                 beginAtZero: true,
+
+                                grid: {
+                                    color: '#e9ecef',
+                                    borderDash: [5, 5]
+                                },
+
+                                ticks: {
+                                    color: '#666',
+                                    callback: function(value) {
+                                        return 'Rs. ' + value.toLocaleString();
+                                    }
+                                },
+
                                 title: {
                                     display: true,
-                                    text: 'Total Sales (Rs.)'
+                                    text: 'Sales Amount'
                                 }
                             }
                         },
+
                         plugins: {
-                            legend: { display: true },
-                            tooltip: { enabled: true }
+
+                            legend: {
+                                display: false
+                            },
+
+                            tooltip: {
+
+                                backgroundColor: '#fff',
+                                titleColor: '#000',
+                                bodyColor: '#333',
+                                borderColor: '#ddd',
+                                borderWidth: 1,
+                                padding: 12,
+
+                                callbacks: {
+                                    label: function(context) {
+                                        return ' Rs. ' + context.parsed.y.toLocaleString();
+                                    }
+                                }
+                            }
                         }
                     }
                 });
@@ -240,16 +323,16 @@ function loadMonthlySales(topType) {
     // Dropdown change event for Top Sold Type
     $('#top-sold-type').on('change', function () {
 
-        
+
         const type = $(this).val(); // unit or revenue
         loadTopSoldItems(type);
     });
 
     $('#sales-time-period').on('change', function () {
-       
-        
+
+
         const topType = $(this).val();
-       
+
         loadMonthlySales(topType);
     });
 
@@ -257,5 +340,5 @@ function loadMonthlySales(topType) {
     loadRevenueByCategory();
     loadTopSoldItems($('#top-sold-type').val() || 'unit');
     loadMonthlySales("this_year");
-    
+
 });
