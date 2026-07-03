@@ -1,7 +1,6 @@
 @extends('./layout/layout')
 
 @section('content')
-    <!-- Bootstrap Container -->
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="mb-0">📦 Product List</h2>
@@ -30,9 +29,6 @@
                                 <td>{{ number_format($product->price, 2) }}</td>
                                 <td>{{ $product->stock_quantity }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('products.show', $product->id) }}" class="btn btn-sm btn-outline-info me-1" title="View">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
                                     <a href="{{ route('products.edit', $product->id) }}" class="btn btn-sm btn-outline-warning me-1" title="Edit">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>

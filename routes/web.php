@@ -48,18 +48,18 @@ Route::controller(BillController::class)->group(function(){
     Route::get('/bills','create')->name('bills.create');
     Route::post('/store','store')->name('bills.store');
     Route::get("/bills/print/{id}",'print')->name('bills.print');
-   
+
     // Route::get('/bills/index','index')->name('bills.index');
 });
 Route::middleware(IsUserAdmin::class)->group(function(){
-    
+
 Route::controller(mainController::class)->group(function(){
- 
+
   Route::get("dashboard","dashboard");
-  Route::get("sell","sells")->name('sell');
+  Route::get("/","sells")->name('sell');
 
 });
-// 
+//
 
 Route::controller(SalesController::class)->group(function(){
     Route::get("/revenueByCategory",'revenueByCategory');
@@ -87,7 +87,7 @@ Route::controller(UserController::class)->group(function(){
     Route::get('/user/changePassword/{id}','changePasswordForm')->name('users.showChangePasswordForm');
     Route::put('/user/edit/password/{user}','updatePassword')->name('users.updatePassword');
     Route::post('/user/{user}/stauts','userActivateOrDeactivate')->name('user.status');
-    
+
 });
 });
 });

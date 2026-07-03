@@ -28,38 +28,114 @@ $admin=$checker->checkAdmin();
 </head>
 <body class="bg-gray-100 text-gray-900">
 
-    <header class="bg-blue-600 text-white p-4 shadow-md">
-        <h1 class="text-2xl font-bold">🛒 StoreMaster</h1>
-    </header>
+<header class="topbar">
+
+    <h3>
+
+        <i class="bi bi-shop"></i>
+
+        StoreMaster ERP
+
+    </h3>
+
+</header>
 
     <div class="flex">
         <!-- Sidebar -->
-        <aside class="w-64 bg-white shadow-md p-4 min-h-screen">
-            <nav class="space-y-3">
-                @if ($admin)
-                    <a href="{{ route('products.index') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">Dashboard</a>
-                
-                    
-                @else
-                 <a href="{{ route('user.dashboard') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">Dashboard</a>
-                    
+        <aside class="sidebar">
+
+            <div class="sidebar-header">
+
+                <i class="bi bi-shop-window"></i>
+
+                <span>StoreMaster</span>
+
+            </div>
+
+            <nav>
+
+                @if($admin)
+
+                    <a href="{{ route('sell') }}"
+                       class="sidebar-link {{ request()->routeIs('sell') ? 'active' : '' }}">
+
+                        <i class="bi bi-speedometer2"></i>
+
+                        Dashboard
+
+                    </a>
+
                 @endif
-                    
-                
-                <a href="{{ route('products.index') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">Manage Products</a>
-                <a href="{{ route('category.index') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">Manage Categories</a>
-                <a href="{{ route('bills.create') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">Billing
-                     </a>
-               @if($admin)
-                 <a href="{{ route('sell') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">Sales </a>
-                <a href="{{ route('analytics') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">Reports & Analytics</a>
-                <a href="{{ route('user.dashboard') }}" class="block py-2 px-4 hover:bg-blue-100 rounded">User Management</a>
-               @endif
-                <form action="{{ route('logout') }}" method="POST" class="pt-2">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-danger w-100">Logout</button>
-                </form>
+
+                <a href="{{ route('products.index') }}"
+                   class="sidebar-link {{ request()->routeIs('products.*') ? 'active' : '' }}">
+
+                    <i class="bi bi-box-seam"></i>
+
+                    Products
+
+                </a>
+
+                <a href="{{ route('category.index') }}"
+                   class="sidebar-link {{ request()->routeIs('category.*') ? 'active' : '' }}">
+
+                    <i class="bi bi-tags"></i>
+
+                    Categories
+
+                </a>
+
+                <a href="{{ route('bills.create') }}"
+                   class="sidebar-link {{ request()->routeIs('bills.*') ? 'active' : '' }}">
+
+                    <i class="bi bi-receipt"></i>
+
+                    Billing
+
+                </a>
+
+                @if($admin)
+
+                    <a href="{{ route('analytics') }}"
+                       class="sidebar-link {{ request()->routeIs('analytics') ? 'active' : '' }}">
+
+                        <i class="bi bi-bar-chart"></i>
+
+                        Analytics
+
+                    </a>
+
+                    <a href="{{ route('user.dashboard') }}"
+                       class="sidebar-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
+
+                        <i class="bi bi-people"></i>
+
+                        Users
+
+                    </a>
+
+                @endif
+
             </nav>
+
+            <div class="logout-area">
+
+                <form action="{{ route('logout') }}" method="POST">
+
+                    @csrf
+
+                    <button class="btn btn-danger w-100">
+
+                        <i class="bi bi-box-arrow-right me-2"></i>
+
+                        Logout
+
+                    </button>
+
+                </form>
+
+            </div>
+
         </aside>
 
         <!-- Main Content -->
