@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class AnalyticsContrller extends Controller
 {
-    
+
 
 public function analyticsDashboard()
 {
@@ -21,17 +21,14 @@ public function analyticsDashboard()
         ->whereYear('created_at', $currentYear)
         ->sum('total_amount');
 
-    // Predicted sales (your function)
+
     $sales=new SalesPredictionController;
     $predictedSales = $sales->predictNextMonthSales();
 
-    // Stock alert products (<10 quantity)
     $stockAlerts = DB::table('products')
         ->where('stock_quantity', '<', 10)
         ->get();
 
-
-    // Undemanded products (no sales in last 30 days)
     $thirtyDaysAgo = Carbon::now()->subDays(30);
 
     // Get IDs of products sold in last 30 days
